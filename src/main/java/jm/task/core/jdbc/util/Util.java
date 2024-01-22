@@ -3,7 +3,6 @@ package jm.task.core.jdbc.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverAction;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -28,10 +27,6 @@ public class Util {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static String getValue(String key) {
-        return PROPERTIES.getProperty(key);
     }
 
     public static Connection openConnection() {
