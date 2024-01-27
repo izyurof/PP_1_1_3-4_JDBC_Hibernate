@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void createUsersTable() {
         String createTable = """
-                create table if not exists my_database.users
+                create table if not exists users
                 (
                 id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                 name VARCHAR(64) NOT NULL,
@@ -35,7 +35,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void dropUsersTable() {
         String dropTable = """
-                drop table if exists my_database.users;
+                drop table if exists users;
                 """;
         try (Connection connection = Util.openConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(dropTable)) {
@@ -47,7 +47,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         String addUser = """
-                insert into my_database.users (name, last_name, age)
+                insert into users (name, last_name, age)
                 values (?, ?, ?);
                 """;
 
@@ -68,7 +68,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void removeUserById(long id) {
         String removeUser = """
-                delete from my_database.users
+                delete from users
                 where id=?;
                 """;
 
@@ -89,7 +89,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 name,
                 last_name,
                 age
-                from my_database.users;
+                from users;
                 """;
 
         try (Connection connection = Util.openConnection();
@@ -111,7 +111,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void cleanUsersTable() {
         String cleanTable = """
-                delete from my_database.users;
+                delete from users;
                 """;
 
         try (Connection connection = Util.openConnection();
