@@ -17,10 +17,10 @@ public class UserDaoJDBCImpl implements UserDao {
         String createTable = """
                 create table if not exists users
                 (
-                id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-                name VARCHAR(64) NOT NULL,
-                last_name VARCHAR(64) NOT NULL,
-                age INT NOT NULL
+                id serial primary key ,
+                name VARCHAR(64) ,
+                last_name VARCHAR(64) ,
+                age B
                 );
                 """;
 

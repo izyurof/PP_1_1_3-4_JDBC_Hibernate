@@ -18,7 +18,7 @@ public class Util {
     private static final Properties PROPERTIES = new Properties();
     private static final String URL_KEY = "url";
     private static final String USERNAME_KEY = "username";
-    private static final String PASSWORD_KEY = "username";
+    private static final String PASSWORD_KEY = "password";
 
     static {
         loadProperties();

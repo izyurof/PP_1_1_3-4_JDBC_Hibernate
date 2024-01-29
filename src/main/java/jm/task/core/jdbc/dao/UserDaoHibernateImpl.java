@@ -15,7 +15,6 @@ public class UserDaoHibernateImpl implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
-
     @Override
     public void createUsersTable() {
         String createTable = """
@@ -61,27 +60,28 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        User user = session.get(User.class, id);
-        session.delete(user);
+        session.createQuery("delete from User u where u.id = :param")
+                .setParameter("param", id)
+                .executeUpdate();
         session.getTransaction().commit();
     }
 
     @Override
     public List<User> getAllUsers() {
-        String hql = "select u from User u";
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List<User> userList = session.createQuery(hql, User.class).list();
+        List<User> userList = session.createQuery("select u from User u", User.class)
+                .list();
         session.getTransaction().commit();
         return userList;
     }
 
     @Override
     public void cleanUsersTable() {
-        String hql = "delete from User";
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.createQuery(hql).executeUpdate();
+        session.createQuery("delete from User")
+                .executeUpdate();
         session.getTransaction().commit();
     }
 }
